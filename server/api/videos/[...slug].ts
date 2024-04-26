@@ -40,15 +40,10 @@ router.get("/video/:id/caption", (event) => {
   try {
     const id = getRouterParam(event, "id");
     const filePath = path.resolve(process.cwd(), `public/captions/${id}.vtt`);
-    const size = fs.statSync(filePath).size;
-    //   const videoRange = event.node.req.headers.range;
-    setHeader(event, "Content-Type", "video/mp4");
-    setHeader(event, "Accept-Ranges", "bytes");
-    setHeader(event, "Content-Length", size);
-    return sendStream(event, fs.createReadStream(filePath));
+    return 
   } catch (error) {
     return error
-  }
+  } 
 });
 
 export default useBase("/api/videos", router.handler);
